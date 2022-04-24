@@ -1,4 +1,4 @@
-1. Create a .gitignore file and add node_modules to it.
+<--->1. Create a .gitignore file and add node_modules to it. <--->
 
 2. Create a server.js file that will serve up the application
     - Import all your required dependencies

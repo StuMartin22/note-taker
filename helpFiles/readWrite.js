@@ -5,7 +5,7 @@ const util = require('util');
 const readIt = util.promisify(fs.readFile);
 //write data to JSON file when given a destination and content.
 const writeIt = (destination, content) =>
-  fs.writeIt(destination, JSON.stringify(content, null, 4), (err) =>
+  fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
     err ? console.error(err) : console.info(`\nWrote info to: ${destination}`)
   );
 //read data from file and append it.

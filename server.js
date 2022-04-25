@@ -5,6 +5,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const randomID = require('./helpFiles/idGenerator')
+const { getNotes, saveNotes } = require('./iGotSomeRoots/notesRoutes')
 // Set body parsing
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -30,4 +31,5 @@ app.get('/notes', (req, res) =>
 //Create a POST route for `api/notes` that saves a new note to the db.json file
 app.post('/api/notes', (req, res) => {
     console.info(`${req.method} request received to add a note`);
+    saveNotes();
 });

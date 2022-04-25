@@ -11,6 +11,7 @@ notes.get('/', (req, res) => {
 };
 
 // POST Route for a newNote
+function saveNotes() {
 notes.post('/', (req, res) => {
   console.log(req.body);
 //declare body as the title and text of a note
@@ -22,6 +23,7 @@ notes.post('/', (req, res) => {
       text,
       note_id: randomID(),
     };
+
 //read and append newNote to the db.json file
     readItAddIt(newNote, './db/db.json');
     res.json(`Note added. Very nice.`);
@@ -29,5 +31,6 @@ notes.post('/', (req, res) => {
     res.error('Oop try again.');
   }
 });
+};
 //ship that puppy off.
-module.exports = getNotes;
+module.exports = getNotes,saveNotes;

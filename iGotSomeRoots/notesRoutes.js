@@ -1,32 +1,33 @@
 // ---------ROUTER-----------------------------------------
-const tips = require('express').Router();
-const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
-const uuid = require('../helpers/uuid');
+const notes = require('express').Router();
+const { readIt, readItAddIt } = require('../helpFiles/readWrite');
+const randomID = require('../helpFiles/idGenerator');
 
-// GET Route for retrieving all the tips
+// GET Route for retrieving all the notes
+function getNotes() {
 notes.get('/', (req, res) => {
-  readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+  readIt('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
+};
 
-// POST Route for a new UX/UI tip
-tips.post('/', (req, res) => {
+// POST Route for a newNote
+notes.post('/', (req, res) => {
   console.log(req.body);
-
-  const { username, topic, tip } = req.body;
-
+//declare body as the title and text of a note
+  const { title,text } = req.body;
+//if the body is requested declare a newNote object thats title, text, and a randomID
   if (req.body) {
-    const newTip = {
-      username,
-      tip,
-      topic,
-      tip_id: uuid(),
+    const newNote = {
+      title,
+      text,
+      note_id: randomID(),
     };
-
-    readAndAppend(newTip, './db/tips.json');
-    res.json(`Tip added successfully 🚀`);
+//read and append newNote to the db.json file
+    readItAddIt(newNote, './db/db.json');
+    res.json(`Note added. Very nice.`);
   } else {
-    res.error('Error in adding tip');
+    res.error('Oop try again.');
   }
 });
-
-module.exports = tips;
+//ship that puppy off.
+module.exports = getNotes;
